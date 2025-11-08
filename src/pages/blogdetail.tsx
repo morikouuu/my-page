@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import fm from "front-matter";
-import { marked } from "marked";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type BlogFrontMatter = {
 	title?: string;
@@ -49,16 +50,6 @@ const BlogDetail = () => {
 	// body: frontmatterを除いたMarkdown本文
 	const markdown = content.toString();
 	const { attributes, body } = fm<BlogFrontMatter>(markdown);
-	const {
-		title = "",
-		date = "",
-		description = "",
-		thumbnail,
-		eyecatch,
-	} = attributes;
-
-	// markedライブラリでMarkdownをHTMLに変換
-	const htmlContent = marked(body);
 
 	return (
 		<div>
@@ -66,23 +57,24 @@ const BlogDetail = () => {
 			<Link to="/blog">← ブログ一覧に戻る</Link>
 
 			{/* サムネイル画像がある場合のみ表示 */}
-			{(thumbnail || eyecatch) && (
-				<img src={thumbnail || eyecatch} alt={title} />
+			{(attributes.thumbnail || attributes.eyecatch) && (
+				<img
+					src={attributes.thumbnail || attributes.eyecatch}
+					alt={attributes.title}
+				/>
 			)}
 
 			<article>
 				{/* frontmatterから取得したタイトルを表示 */}
-				<h1>{title || "無題"}</h1>
+				<h1>{attributes.title || "無題"}</h1>
 				{/* 公開日を表示 */}
-				<p>{date}</p>
+				<p>{attributes.date}</p>
 
 				{/* descriptionがある場合のみ表示 */}
-				{description && <p>{description}</p>}
+				{attributes.description && <p>{attributes.description}</p>}
 
-				{/* MarkdownをHTMLに変換した内容を表示 */}
-				{/* dangerouslySetInnerHTMLは、文字列のHTMLを直接DOMに挿入するReactの機能 */}
-				{/* markedで変換したHTMLを安全に表示するために使用 */}
-				<div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+				{/* ReactMarkdownでMarkdownを安全に描画 */}
+				<ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
 			</article>
 		</div>
 	);

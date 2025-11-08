@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import Navbar from "../components/navbar";
 const Home = () => {
 	const bubbles = [
 		{ id: 1, label: "Blog", link: "/blog", image: "/images/blog.png" },
@@ -17,23 +17,7 @@ const Home = () => {
 	];
 	return (
 		<div>
-			<nav>
-				<h2>my page</h2>
-				<ul>
-					<li>
-						<Link to="/">Blog</Link>
-					</li>
-					<li>
-						<Link to="/product">Product</Link>
-					</li>
-					<li>
-						<Link to="/profile">Profile</Link>
-					</li>
-					<li>
-						<Link to="/contact">Contact</Link>
-					</li>
-				</ul>
-			</nav>
+			<Navbar />
 
 			<div className="bubble-area">
 				<div className="bubbles">

@@ -5,3 +5,11 @@ export type Post = {
 	description?: string; // 記事の説明文（オプション）
 	thumbnail?: string; // サムネイル画像のパス（オプション）
 };
+
+export type BlogFrontMatter = {
+	title?: string;
+	date?: string;
+	description?: string;
+	thumbnail?: string;
+	eyecatch?: string;
+};
