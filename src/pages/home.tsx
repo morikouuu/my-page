@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Navbar from "../components/navbar";
+
 const Home = () => {
 	const bubbles = [
 		{ id: 1, label: "Blog", link: "/blog", image: "/images/blog.png" },
@@ -17,8 +17,6 @@ const Home = () => {
 	];
 	return (
 		<div>
-			<Navbar />
-
 			<div className="bubble-area">
 				<div className="bubbles">
 					{bubbles.map((bubble) => (

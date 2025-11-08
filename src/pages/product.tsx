@@ -2,7 +2,7 @@ const Product = () => {
 	return (
 		<div>
 			<h1>Product</h1>
-			<p>coming soon...</p>
+			<p>開発中...</p>
 		</div>
 	);
 };
