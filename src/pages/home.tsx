@@ -16,7 +16,8 @@ const Home = () => {
 		{ id: 2, label: "X", link: "" },
 	];
 
-	const postList = usePosts({ limit: 3 });
+	const postList = usePosts();
+	const latestPosts = postList.slice(0, 3);
 	return (
 		<div>
 			<div className="bubble-area">
@@ -37,12 +38,12 @@ const Home = () => {
 				<div>
 					<ul>
 						{/* postListの各投稿をカード形式で表示 */}
-						{postList.map((post) => (
+						{latestPosts.map((post) => (
 							<li key={post.slug}>
 								<Link to={`/blog/${post.slug}`}>
 									{/* サムネイル画像がある場合のみ表示 */}
 									<div>
-										<h2>{post.title || "無題"}</h2>
+										<h2>{post.attributes.title || "無題"}</h2>
 									</div>
 								</Link>
 							</li>

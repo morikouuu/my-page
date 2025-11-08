@@ -11,7 +11,7 @@ export const usePosts = (): PostList[] => {
 
 	// 読み込んだファイルをBlogPost型の配列に変換
 	const postList: PostList[] = Object.entries(posts).map(([path, content]) => {
-		const slug = path.split("/").pop()?.replace(".md", "") || "";
+		const slug = path.split("/").pop()?.replace(".md", "") ?? "";
 		const { attributes } = fm<BlogFrontMatter>(content);
 		// frontmatterのデータとslugを組み合わせてBlogPostオブジェクトを作成
 		return {

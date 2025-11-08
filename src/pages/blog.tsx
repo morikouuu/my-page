@@ -14,9 +14,11 @@ const Blog = () => {
 						<Link to={`/blog/${post.slug}`}>
 							{/* サムネイル画像がある場合のみ表示 */}
 							<div>
-								<h2>{post.title || "無題"}</h2>
-								{post.description && <p>{post.description}</p>}
-								{post.date && <p>{post.date}</p>}
+								<h2>{post.attributes.title || "無題"}</h2>
+								{post.attributes.description && (
+									<p>{post.attributes.description}</p>
+								)}
+								{post.attributes.date && <p>{post.attributes.date}</p>}
 							</div>
 						</Link>
 					</li>
