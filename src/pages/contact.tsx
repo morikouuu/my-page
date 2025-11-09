@@ -1,10 +1,34 @@
-const Contact = () => {
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+const ContactForm = () => {
+	const handleSubmit = () => {};
 	return (
 		<div>
-			<h1>Contact</h1>
-			<p>連絡先です</p>
+			<form className="contact-form">
+				<input
+					type="text"
+					name="name"
+					placeholder="名前"
+					className="contact-input"
+				/>
+				<input
+					type="email"
+					name="email"
+					placeholder="メールアドレス"
+					className="contact-input"
+				/>
+				<input
+					type="text"
+					name="message"
+					placeholder="メッセージ"
+					className="contact-email"
+				/>
+				<button type="submit" onClick={handleSubmit} className="contact-button">
+					送信
+				</button>
+			</form>
 		</div>
 	);
 };
 
-export default Contact;
+export default ContactForm;
