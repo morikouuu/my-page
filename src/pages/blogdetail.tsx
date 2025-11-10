@@ -3,6 +3,7 @@ import fm from "front-matter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+// useHookに変更
 type BlogFrontMatter = {
 	title?: string;
 	date?: string;

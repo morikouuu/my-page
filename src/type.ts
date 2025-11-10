@@ -18,3 +18,9 @@ export type PostList = {
 	slug: string;
 	attributes: BlogFrontMatter;
 };
+
+export type ContactForm = {
+	name: string;
+	email: string;
+	message: string;
+};
