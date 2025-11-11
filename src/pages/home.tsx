@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { usePosts } from "../hooks/usePosts";
 import { useMemo } from "react";
 const Home = () => {
+	//自分が一番見て欲しいものをここに記載する
 	const bubbles = [
-		{ id: 1, label: "Blog", link: "/blog/post1" },
+		{ id: 1, label: "Blog 11/5 📃", link: "/blog/2025-11-05" },
 		{
 			id: 2,
-			label: "Products",
-			link: "/products",
-			image: "/images/products.png",
+			label: "Blog 11/8 📃",
+			link: "/blog/2025-11-08",
 		},
 		{ id: 3, label: "About", link: "/about", image: "/images/about.png" },
 	];

@@ -2,8 +2,9 @@ import { useParams, Link } from "react-router-dom";
 import fm from "front-matter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { usePosts } from "../hooks/usePosts";
 
-// useHookに変更
+//TODO usePostに変更?
 type BlogFrontMatter = {
 	title?: string;
 	date?: string;
@@ -15,25 +16,12 @@ type BlogFrontMatter = {
 const BlogDetail = () => {
 	// useParamsフックでURLパラメータからslugを取得
 	// 例: /blog/post1 にアクセスした場合、slug = "post1"
-	const { slug } = useParams<{ slug: string }>();
+	const slug = useParams<{ slug: string }>();
 
-	// すべてのマークダウンファイルを読み込む
-	// blog.tsxと同じ方法でファイルを読み込む（文字列として取得）
-	const posts = import.meta.glob("../posts/*.md", {
-		eager: true,
-		query: "?raw",
-		import: "default",
-	}) as Record<string, string>;
-
-	// slugに一致するファイルを探す
-	// Object.entriesで[パス, ファイル内容]の配列に変換し、
-	// findメソッドでslugと一致するファイルを検索
-	const postEntry = Object.entries(posts).find(
-		([path]) => path.split("/").pop()?.replace(".md", "") === slug
-	);
-
+	const postList = usePosts();
+	const postFile = postList.find((post) => slug === post.slug);
 	// 該当するファイルが見つからない場合のエラーハンドリング
-	if (!postEntry) {
+	if (!postFile) {
 		return (
 			<div>
 				<h1>記事が見つかりません</h1>
@@ -42,14 +30,7 @@ const BlogDetail = () => {
 		);
 	}
 
-	// postEntryは[パス, ファイル内容]のタプル
-	// 配列の分割代入でファイル内容のみを取得（パスは不要なので_で無視）
-	const [, content] = postEntry;
-
-	// front-matterでfrontmatterと本文を分離
-	// attributes: frontmatterの内容（title, date, description, thumbnailなど）
-	// body: frontmatterを除いたMarkdown本文
-	const markdown = content.toString();
+	const markdown = postFile.toString();
 	const { attributes, body } = fm<BlogFrontMatter>(markdown);
 
 	return (
