@@ -10,10 +10,10 @@ const Home = () => {
 			label: "Blog 11/8 📃",
 			link: "/blog/2025-11-08",
 		},
-		{ id: 3, label: "About", link: "/about", image: "/images/about.png" },
+		{ id: 3, label: "About", link: "/product" },
 	];
 	const snsBubbles = [
-		{ id: 1, label: "Github", link: "github.com/morikouuu" },
+		{ id: 1, label: "Github", link: "https://github.com/morikouuu" },
 		{
 			id: 2,
 			label: "X",
@@ -43,7 +43,6 @@ const Home = () => {
 				</div>
 				<div>
 					<ul>
-						{/* postListの各投稿をカード形式で表示 */}
 						{latestPosts.map((post) => (
 							<li key={post.slug}>
 								<Link to={`/blog/${post.slug}`}>
